@@ -1,0 +1,43 @@
+.wizard-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    animation: fadeIn .3s ease;
+}
+
+.option-card {
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    cursor: pointer;
+    text-align: center;
+    transition: .2s;
+}
+
+.option-card.selected {
+    border-color: #004085;
+    background: #e8f1ff;
+}
+
+.option-card {
+    display: block;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* oculta el radio */
+.option-card input[type="radio"] {
+    display: none;
+}
+
+/* estilo al seleccionar */
+.option-card input[type="radio"]:checked+h5 {
+    border: 2px solid #007bff;
+    padding: 0.5rem;
+    border-radius: 8px;
+    background: rgba(0, 123, 255, 0.1);
+}
