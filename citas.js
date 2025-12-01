@@ -116,22 +116,6 @@ function avanzarPaso() {
     }
 }
 
-function fakeApiHoras(moduloID) {
-    return new Promise(resolve => {
-        setTimeout(() => {
-            resolve({
-                horas: [
-                    "08:00",
-                    "08:20",
-                    "08:40",
-                    "09:00",
-                    "09:20"
-                ]
-            });
-        }, 500);
-    });
-}
-
 function selectTipo(tipo, ev) {
     tipoCita = tipo;
 
