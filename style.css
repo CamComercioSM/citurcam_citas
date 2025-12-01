@@ -7,6 +7,8 @@
 }
 
 .option-card {
+    position: relative;              /* clave para posicionar el radio dentro */
+    display: block;
     border: 2px solid #e0e0e0;
     border-radius: 12px;
     padding: 20px;
@@ -20,24 +22,17 @@
     background: #e8f1ff;
 }
 
-.option-card {
-    display: block;
-    border: 2px solid #e0e0e0;
-    border-radius: 10px;
-    padding: 1rem;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-/* oculta el radio */
+/* "oculta" el radio, pero sigue recibiendo el click */
 .option-card input[type="radio"] {
-    display: none;
+    position: absolute;
+    inset: 0;              /* ocupa toda la tarjeta */
+    margin: 0;
+    opacity: 0;            /* invisible */
+    cursor: pointer;
+    /* IMPORTANTE: sin pointer-events:none */
 }
 
-/* estilo al seleccionar */
-.option-card input[type="radio"]:checked+h5 {
-    border: 2px solid #007bff;
-    padding: 0.5rem;
-    border-radius: 8px;
-    background: rgba(0, 123, 255, 0.1);
+/* estilo suave al texto cuando está checked (no recuadro extra) */
+.option-card input[type="radio"]:checked + h5 {
+    font-weight: 600;
 }

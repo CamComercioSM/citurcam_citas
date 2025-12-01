@@ -20,7 +20,7 @@
             <form class="wizard" id="formWizard">
                 <aside class="wizard-content container">
                     <div class="wizard-step" data-title="Adrii">
-                        <input type="hidden" id="tipoCitaInput" name="tipoCita" class="required">
+                        <input type="hidden" id="tipoCitaInput" name="citaTIPO" class="required">
                         <div class="form-group">
                             <div class="row g-3 mt-4">
                                 <div class="col-6">
@@ -40,21 +40,20 @@
                     </div>
                     <div class="wizard-step">
                         <div class="step-title mb-3"><i class="bi bi-calendar-week"></i> Seleccione la fecha</div>
-
+                        <input type="hidden" id="flagFechaCita" name="flagFechaCita" value="0">
                         <p>Elige una fecha disponible según el tipo de cita.</p>
 
                         <div id="selectFecha" class="mt-3"></div>
                     </div>
-
                     <div class="wizard-step">
                         <div class="step-title mb-3"><i class="bi bi-people"></i> Seleccione un módulo</div>
-                        <input type="hidden" id="moduloServicioCita" name="moduloServicioCita" class="required">
+                        <input type="hidden" id="flagModulo" name="flagModulo" value="0">
                         <div id="modulosContainer" class="mt-3"></div>
 
                     </div>
                     <div class="wizard-step">
                         <div class="step-title mb-3"><i class="bi bi-clock"></i> Seleccione la hora</div>
-                        <input type="hidden" id="horaCita" name="horaCita" class="required">
+                        <input type="hidden" id="flagHoraCita" name="flagHoraCita" value="0">
                         <div id="horasContainer"></div>
                     </div>
                     <div class="wizard-step" data-title="Adrii">
@@ -69,38 +68,40 @@
                             </label>
                         </div>
                         <div class="mt-3">
-                            <label>Tipo identificacion *</label>
-                            <input type="text" name="tipoIdentificacion" id="tipoIdentificacion" class="form-control" required>
+                            <label for="tipoIdentificacion">Tipo identificación *</label>
+                            <select name="tipoIdentificacionID" id="tipoIdentificacion" class="form-control" required>
+                                <option value="">Seleccione...</option>
+                            </select>
                         </div>
 
                         <div class="mt-3">
                             <label>Identificación *</label>
-                            <input type="text" name="identificacion" id="identificacion" class="form-control" required>
+                            <input type="text" name="personaIDENTIFICACION" id="identificacion" class="form-control" required>
                         </div>
                         <div class="mt-3">
                             <label>Primer nombre *</label>
-                            <input type="text" name="primerNombre" id="primerNombre" class="form-control" required>
+                            <input type="text" name="personaPRIMERNOMBRE" id="primerNombre" class="form-control" required>
                         </div>
                         <div class="mt-3">
                             <label>Segundo nombre</label>
-                            <input type="text" name="segundoNombre" id="segundoNombre" class="form-control">
+                            <input type="text" name="personaSEGUNDONOMBRE" id="segundoNombre" class="form-control">
                         </div>
                         <div class="mt-3">
                             <label>Primer Apellido *</label>
-                            <input type="text" name="primerApellido" id="primerApellido" class="form-control" required>
+                            <input type="text" name="personaPRIMERAPELLIDO" id="primerApellido" class="form-control" required>
                         </div>
                         <div class="mt-3">
                             <label>Segundo apellido</label>
-                            <input type="text" name="segundoApellido" id="segundoApellido" class="form-control">
+                            <input type="text" name="personaSEGUNDOAPELLIDO" id="segundoApellido" class="form-control">
                         </div>
                         <div class="mt-3">
                             <label>Correo electrónico</label>
-                            <input type="text" name="correo" id="correo" class="form-control" required>
+                            <input type="email" name="personasCorreoPRINCIPAL" id="correo" class="form-control" required>
                         </div>
 
                         <div class="mt-3">
                             <label>Teléfono</label>
-                            <input type="text" name="telefono" id="telefono" class="form-control" required>
+                            <input type="number" name="telefonoNUMEROCELULAR" id="telefono" class="form-control" required>
                         </div>
 
                     </div>
