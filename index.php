@@ -81,37 +81,60 @@
 
                         <div class="mt-3">
                             <label>Identificación *</label>
-                            <input type="text" name="personaIDENTIFICACION" id="identificacion" class="form-control" pattern="^(?!0+$).*$"  maxlength="15" required>
+                            <input type="text" name="personaIDENTIFICACION" id="identificacion" class="form-control" pattern="^(?!0+$).*$" maxlength="15" required>
                         </div>
                         <div class="mt-3">
                             <label>Primer nombre *</label>
-                            <input type="text" name="personaPRIMERNOMBRE" id="primerNombre" class="form-control"  maxlength="200" required>
+                            <input type="text" name="personaPRIMERNOMBRE" id="primerNombre" class="form-control" maxlength="200" required>
                         </div>
                         <div class="mt-3">
                             <label>Segundo nombre</label>
-                            <input type="text" name="personaSEGUNDONOMBRE" id="segundoNombre" class="form-control"  maxlength="200">
+                            <input type="text" name="personaSEGUNDONOMBRE" id="segundoNombre" class="form-control" maxlength="200">
                         </div>
                         <div class="mt-3">
                             <label>Primer Apellido *</label>
-                            <input type="text" name="personaPRIMERAPELLIDO" id="primerApellido" class="form-control"  maxlength="200" required>
+                            <input type="text" name="personaPRIMERAPELLIDO" id="primerApellido" class="form-control" maxlength="200" required>
                         </div>
                         <div class="mt-3">
                             <label>Segundo apellido</label>
-                            <input type="text" name="personaSEGUNDOAPELLIDO" id="segundoApellido" class="form-control"  maxlength="200">
+                            <input type="text" name="personaSEGUNDOAPELLIDO" id="segundoApellido" class="form-control" maxlength="200">
                         </div>
                         <div class="mt-3">
                             <label>Correo electrónico *</label>
-                            <input type="email" name="personasCorreoPRINCIPAL" id="correo" class="form-control"  maxlength="200" required>
+                            <input type="email" name="correoDIRECCION" id="correo" class="form-control" maxlength="200" required>
                         </div>
 
                         <div class="mt-3">
                             <label>Numero celular *</label>
-                            <input type="number" name="telefonoNUMEROCELULAR" id="telefono" class="form-control"  maxlength="15" required>
+                            <input type="number" name="telefonoNUMERO" id="telefono" class="form-control" maxlength="15" required>
                         </div>
 
                     </div>
                 </aside>
             </form>
+            <div id="confirmacionCita" class="text-center d-none">
+                <i class="bi bi-check-circle-fill text-success" style="font-size: 3rem;"></i>
+                <h3 class="mt-3">Tu cita fue creada correctamente</h3>
+                <p class="text-muted">Guarda esta información de tu cita:</p>
+
+                <div class="mt-4">
+                    <div class="h5 mb-1">Número de turno</div>
+                    <div class="display-5 fw-bold" id="confNumeroTurno">—</div>
+                </div>
+
+                <div class="mt-4">
+                    <p class="mb-1">
+                        <strong>Fecha:</strong> <span id="confFecha">—</span><br>
+                        <strong>Hora:</strong> <span id="confHora">—</span><br>
+                        <strong>Módulo:</strong> <span id="confModulo">—</span><br>
+                        <strong>Correo:</strong> <span id="confCorreo">—</span>
+                    </p>
+                </div>
+
+                <button type="button" class="btn btn-primary mt-4" onclick="window.location.reload()">
+                    Crear otra cita
+                </button>
+            </div>
 
         </main>
         <script src="https://cdn.jsdelivr.net/gh/AdrianVillamayor/Wizard-JS@2.0.3/dist/index.js"></script>

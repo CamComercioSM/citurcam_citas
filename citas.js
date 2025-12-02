@@ -245,24 +245,25 @@ async function CrearTarjetasDeHorasDisponibles() {
     const citasModulos = res.datos || [];
     if (citasModulos.length > 0) {
         citasModulos.forEach((bloque, index) => {
-            const disponible = bloque.citas.some(cita =>
+            const citaDisponible = bloque.citas.find(cita =>
                 cita.moduloAtencionID == moduloAtencionID &&
                 cita.personaID === null
             );
-
-            if (!disponible) {
+            if (!citaDisponible) {
                 return;
             }
             hayHoras = true;
             const fechaHora = bloque.citaFCHCITA;
             const soloHora = fechaHora.split(" ")[1].substring(0, 5);
+
+            const citaID = citaDisponible.citaID;
             cont.innerHTML += `
                 <label class="option-card mt-2 hora-${index}">
                     <input 
                         type="radio" 
-                        name="horaCITA" 
+                        name="citaID" 
                         id="hora${index}" 
-                        value="${soloHora}"
+                        value="${citaID}"
                         onchange="selectHora('${soloHora}', this)"
                         data-require-if="flagHoraCita:0"
                     >
@@ -271,11 +272,9 @@ async function CrearTarjetasDeHorasDisponibles() {
             `;
         });
     }
-
     if (!hayHoras) {
         mostrarAlertaDePasoVacio(cont, 'No hay horas disponibles para el modulo seleccionado.');
     }
-
     mostrarModalDeCarga(false);
 }
 
@@ -292,7 +291,7 @@ function selectHora(hora, element) {
     }
 
     const flag = document.getElementById('flagHoraCita');
-    const algunoMarcado = !!document.querySelector('input[name="horaCITA"]:checked');
+    const algunoMarcado = !!document.querySelector('input[name="citaID"]:checked');
     flag.value = algunoMarcado ? '1' : '0';
     avanzarPaso();
 }
@@ -300,20 +299,40 @@ function selectHora(hora, element) {
 
 $wz_doc.addEventListener("wz.form.submit", async function () {
 
-    const formData = new FormData(document.querySelector(".wizard"));
+    mostrarModalDeCarga(true);
 
+    const formData = new FormData(document.querySelector(".wizard"));
     const params = {};
+
+    // Lista exacta de campos que SÍ quieres enviar
+    const camposPermitidos = [
+        "citaID",
+        "tipoIdentificacionID",
+        "personaIDENTIFICACION",
+        "personaPRIMERNOMBRE",
+        "personaSEGUNDONOMBRE",
+        "personaPRIMERAPELLIDO",
+        "personaSEGUNDOAPELLIDO",
+        "correoDIRECCION",
+        "telefonoNUMEROCELULAR"
+    ];
+
     formData.forEach((value, key) => {
-        params[key] = value;
+        if (camposPermitidos.includes(key)) {
+            params[key] = value;
+        }
     });
 
-
-    //const res  = await conectarseEndPoint('guardarCita', params);
+    const res = await conectarseEndPoint('guardarCita', params);
 
     console.log("Datos a enviar:", params);
-    alert("¡Cita agendada!");
+    console.log("datos recibidos", res);
+
+    mostrarAlertaExito(res);
     mostrarModalDeCarga(false);
 });
+
+
 
 window.conectarseEndPoint = async function (operacion, params = {}) {
     const api = 'https://api.citurcam.com/' + operacion;
@@ -361,4 +380,10 @@ function mostrarAlertaDePasoVacio(contenedor, mensaje) {
             aria-hidden="true"
         >
     `;
+}
+
+function mostrarAlertaExito(datos) {
+    document.querySelector(".wizard").classList.add("d-none");
+    const conf = document.getElementById("confirmacionCita");
+    if (conf) conf.classList.remove("d-none");
 }
