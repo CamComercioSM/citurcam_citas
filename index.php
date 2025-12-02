@@ -19,7 +19,7 @@
         <main class="container">
             <form class="wizard" id="formWizard">
                 <aside class="wizard-content container">
-                    <div class="wizard-step" data-title="Adrii">
+                    <div class="wizard-step" data-wz-title="Tipo de cita">
                         <input type="hidden" id="tipoCitaInput" name="citaTIPO" class="required">
                         <div class="form-group">
                             <div class="row g-3 mt-4">
@@ -38,25 +38,25 @@
                             </div>
                         </div>
                     </div>
-                    <div class="wizard-step">
+                    <div class="wizard-step" data-wz-title="Fecha de la cita">
                         <div class="step-title mb-3"><i class="bi bi-calendar-week"></i> Seleccione la fecha</div>
                         <input type="hidden" id="flagFechaCita" name="flagFechaCita" value="0">
                         <p>Elige una fecha disponible según el tipo de cita.</p>
 
                         <div id="selectFecha" class="mt-3"></div>
                     </div>
-                    <div class="wizard-step">
+                    <div class="wizard-step" data-wz-title="Módulo">
                         <div class="step-title mb-3"><i class="bi bi-people"></i> Seleccione un módulo</div>
                         <input type="hidden" id="flagModulo" name="flagModulo" value="0">
                         <div id="modulosContainer" class="mt-3"></div>
 
                     </div>
-                    <div class="wizard-step">
+                    <div class="wizard-step" data-wz-title="Hora de la cita">
                         <div class="step-title mb-3"><i class="bi bi-clock"></i> Seleccione la hora</div>
-                        <input type="hidden" id="flagHoraCita" name="flagHoraCita" value="0">
+                        <input type="hidden" id="flagHoraCita" name="flagHoraCita" value="" require >
                         <div id="horasContainer"></div>
                     </div>
-                    <div class="wizard-step" data-title="Adrii">
+                    <div class="wizard-step" data-wz-title="Datos personales">
                         <div class="step-title mb-3"><i class="bi bi-person"></i> Datos de contacto</div>
                         <div class="mt-4 form-check">
                             <input class="form-check-input required"
@@ -112,5 +112,10 @@
         <script src="https://cdn.jsdelivr.net/gh/AdrianVillamayor/Wizard-JS@2.0.3/dist/index.js"></script>
         <script src="citas.js"></script>
 </body>
-
+<div id="loadingOverlay" class="loading-overlay d-none">
+    <div class="loading-content">
+        <img src="https://cdnsicam.net/img/ccsm/__Logo%20C%C3%A1mara%20para%20el%20Magdalena.png" alt="Cargando..." class="loading-icon">
+        <p class="loading-text">Cargando...</p>
+    </div>
+</div>
 </html>

@@ -9,7 +9,7 @@ const args = {
     "wz_class": ".wizard",
     "wz_nav_style": "dots",
     "wz_button_style": ".btn .btn-sm .mx-3",
-    "wz_ori": "horizontal", // vertical
+    "wz_ori": "horizontal",
     "buttons": true,
     "navigation": "all",
     "finish": "Agendar",
@@ -23,6 +23,7 @@ wizard.init();
 
 let $wz_doc = document.querySelector(wz_class);
 
+//Eventos de cambio en tipo y numero de identificacion
 let tipoIdent = document.getElementById("tipoIdentificacion");
 let identificacion = document.getElementById("identificacion");
 tipoIdent.addEventListener("change", function (e) {
@@ -31,7 +32,6 @@ tipoIdent.addEventListener("change", function (e) {
 identificacion.addEventListener("change", function (e) {
     LlenarFormulario('identificacion');
 });
-
 async function LlenarFormulario(origen) {
     const tipoIdentificacionID = tipoIdent.value.trim();
     const personaIDENTIFICACION = identificacion.value.trim();
@@ -53,7 +53,6 @@ async function LlenarFormulario(origen) {
         try {
             const datos = await conectarseEndPoint('consultarDatosPersona', { tipoIdentificacionID, personaIDENTIFICACION });
             if (datos) {
-                console.log(datos.personasCorreoPRINCIPAL);
                 primerNombre.value = datos.personaPRIMERNOMBRE || "";
                 segundoNombre.value = datos.personaSEGUNDONOMBRE || "";
                 primerApellido.value = datos.personaPRIMERAPELLIDO || "";
@@ -63,12 +62,14 @@ async function LlenarFormulario(origen) {
             } else {
                 console.log("No se encontraron datos para esa combinación.");
             }
+            mostrarModalDeCarga(false);
         } catch (err) {
             console.error("Error consultando persona:", err);
+        } finally {
+            mostrarModalDeCarga(false);
         }
     }
 }
-
 async function cargarTiposIdentificacion() {
     const select = document.getElementById("tipoIdentificacion");
     if (!select) return;
@@ -82,28 +83,24 @@ async function cargarTiposIdentificacion() {
         opt.textContent = t.tipoIdentificacionTITULO;
         select.appendChild(opt);
     });
+    mostrarModalDeCarga(false);
 }
 
 $wz_doc.addEventListener("wz.btn.next", function (e) {
 
     const step = wizard.current_step;
 
-    if (step === 0) {
-        goPaso2();
+    if (step === 0 && tipoCita) {
+        crearTarjetasDeFechasDisponibles();
     }
 
-    if (step === 1) {
-        goPaso3();
+    if (step === 1 && citaFCHCITA) {
+        CrearTarjetasDeModulosDeAtencion();
     }
-    if (step === 2) {
-        goPaso4();
+    if (step === 2 && moduloAtencionID) {
+        CrearTarjetasDeHorasDisponibles();
     }
-    if (step === 3) {
-        if (!horaSeleccionada) {
-            e.preventDefault();
-            alert("Por favor seleccione una hora para la cita.");
-            return;
-        }
+    if (step === 3 && horaSeleccionada) {
         cargarTiposIdentificacion();
     }
 
@@ -131,14 +128,16 @@ function selectTipo(tipo, ev) {
     avanzarPaso();
 }
 
-async function goPaso2() {
+async function crearTarjetasDeFechasDisponibles() {
     if (!tipoCita) return;
+    document.getElementById('flagFechaCita').value = '0';
+    let sel = document.getElementById("selectFecha");
+    sel.innerHTML = "";
+    let hayFechas = false;
     const res = await conectarseEndPoint('buscarFechasCitasHabilitasPorSede', { sedeID });
     const fechas = res.FechasHabilitadas || [];
-    if (fechas) {
-        document.getElementById('flagFechaCita').value = '0';
-        let sel = document.getElementById("selectFecha");
-        sel.innerHTML = "";
+    if (fechas.length > 0) {
+        hayFechas = true;
         fechas.forEach((f, index) => {
             const fechaTexto = f.fecha;
             sel.innerHTML += `
@@ -156,6 +155,8 @@ async function goPaso2() {
             `;
         });
     }
+    if(!hayFechas)  mostrarAlertaDePasoVacio(sel, 'No hay fechas disponibles para el tipo de cita');
+    mostrarModalDeCarga(false);
 }
 
 function selectFechaCita(fecha, element) {
@@ -175,7 +176,7 @@ function selectFechaCita(fecha, element) {
     avanzarPaso();
 }
 
-async function goPaso3() {
+async function CrearTarjetasDeModulosDeAtencion() {
     document.getElementById('flagModulo').value = '0';
     const res = await conectarseEndPoint('calendarioCitasDia', { sedeID, citaFCHCITA });
     const modulos = res.modulos || [];
@@ -199,7 +200,7 @@ async function goPaso3() {
         `;
         });
     }
-
+    mostrarModalDeCarga(false);
 }
 
 function selectModulo(id, element) {
@@ -220,14 +221,15 @@ function selectModulo(id, element) {
     avanzarPaso();
 }
 
-async function goPaso4() {
+async function CrearTarjetasDeHorasDisponibles() {
     if (!moduloAtencionID) return;
     document.getElementById('flagHoraCita').value = '0';
+    let cont = document.getElementById("horasContainer");
+    cont.innerHTML = "";
+    let hayHoras = false;
     const res = await conectarseEndPoint('calendarioCitasDia', { sedeID, citaFCHCITA });
     const citasModulos = res.datos || [];
-    if (citasModulos) {
-        let cont = document.getElementById("horasContainer");
-        cont.innerHTML = "";
+    if (citasModulos.length > 0) {
         citasModulos.forEach((bloque, index) => {
             const disponible = bloque.citas.some(cita =>
                 cita.moduloAtencionID == moduloAtencionID &&
@@ -237,6 +239,7 @@ async function goPaso4() {
             if (!disponible) {
                 return;
             }
+            hayHoras = true;
             const fechaHora = bloque.citaFCHCITA;
             const soloHora = fechaHora.split(" ")[1].substring(0, 5);
             cont.innerHTML += `
@@ -254,6 +257,12 @@ async function goPaso4() {
             `;
         });
     }
+
+    if (!hayHoras) {
+        mostrarAlertaDePasoVacio(cont, 'No hay horas disponibles para el modulo seleccionado.');
+    }
+
+    mostrarModalDeCarga(false);
 }
 
 function selectHora(hora, element) {
@@ -289,7 +298,7 @@ $wz_doc.addEventListener("wz.form.submit", async function () {
 
     console.log("Datos a enviar:", params);
     alert("¡Cita agendada!");
-
+    mostrarModalDeCarga(false);
 });
 
 window.conectarseEndPoint = async function (operacion, params = {}) {
@@ -298,6 +307,7 @@ window.conectarseEndPoint = async function (operacion, params = {}) {
     if (typeof params !== 'object' || params === null) {
         params = params.toString();
     }
+    mostrarModalDeCarga();
     const response = await fetch(api, {
         method: 'POST',
         headers: {
@@ -309,4 +319,32 @@ window.conectarseEndPoint = async function (operacion, params = {}) {
         throw new Error('Error en la petición: ' + response.status);
     }
     return await response.json();
+}
+
+function mostrarModalDeCarga(opcion = true) {
+    if (opcion) {
+        document.getElementById('loadingOverlay').classList.remove('d-none');
+    } else {
+        document.getElementById('loadingOverlay').classList.add('d-none');
+    }
+}
+
+function mostrarAlertaDePasoVacio(contenedor, mensaje) {
+    if (!contenedor) return;
+
+    contenedor.innerHTML = `
+        <div class="alerta-paso-vacio">
+            ${mensaje}
+        </div>
+
+        <!-- Input "fantasma" requerido que bloquea el paso -->
+        <input 
+            type="text" 
+            class="input-bloqueo-paso"
+            required
+            value=""
+            tabindex="-1"
+            aria-hidden="true"
+        >
+    `;
 }
