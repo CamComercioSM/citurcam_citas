@@ -30,7 +30,21 @@ tipoIdent.addEventListener("change", function (e) {
     LlenarFormulario("tipo");
 });
 identificacion.addEventListener("change", function (e) {
+    const valor = this.value.trim();
+
+    if (/^0+$/.test(valor)) {
+        return;
+    }
+    if (valor.length === 0) {
+        return;
+    }
     LlenarFormulario('identificacion');
+
+});
+identificacion.addEventListener("keydown", function (e) {
+    if (e.key === "0" && this.selectionStart === 0) {
+        e.preventDefault();
+    }
 });
 async function LlenarFormulario(origen) {
     const tipoIdentificacionID = tipoIdent.value.trim();
@@ -155,7 +169,7 @@ async function crearTarjetasDeFechasDisponibles() {
             `;
         });
     }
-    if(!hayFechas)  mostrarAlertaDePasoVacio(sel, 'No hay fechas disponibles para el tipo de cita');
+    if (!hayFechas) mostrarAlertaDePasoVacio(sel, 'No hay fechas disponibles para el tipo de cita');
     mostrarModalDeCarga(false);
 }
 

@@ -15,8 +15,13 @@
 </head>
 
 <body class="sb-nav-fixed">
-    <main class="container-fluid pt-5">
-        <main class="container">
+    <main class="d-flex justify-content-center py-5">
+        <main class="appointment-window">
+            <div class="text-center mb-5">
+                <img src="https://www.ccsm.org.co/images/logo.png" width="260" alt="Logo CCSM" class="img rounded img-fluid mx-auto d-block">
+                <div class="h1 fw-light fw-bold py-3 mb-1">Solicita tu cita</div>
+                <p class="text-muted mb-0">Sigue los pasos para generar tu cita.</p>
+            </div>
             <form class="wizard" id="formWizard">
                 <aside class="wizard-content container">
                     <div class="wizard-step" data-wz-title="Tipo de cita">
@@ -53,7 +58,7 @@
                     </div>
                     <div class="wizard-step" data-wz-title="Hora de la cita">
                         <div class="step-title mb-3"><i class="bi bi-clock"></i> Seleccione la hora</div>
-                        <input type="hidden" id="flagHoraCita" name="flagHoraCita" value="" require >
+                        <input type="hidden" id="flagHoraCita" name="flagHoraCita" value="" require>
                         <div id="horasContainer"></div>
                     </div>
                     <div class="wizard-step" data-wz-title="Datos personales">
@@ -76,32 +81,32 @@
 
                         <div class="mt-3">
                             <label>Identificación *</label>
-                            <input type="text" name="personaIDENTIFICACION" id="identificacion" class="form-control" required>
+                            <input type="text" name="personaIDENTIFICACION" id="identificacion" class="form-control" pattern="^(?!0+$).*$"  maxlength="15" required>
                         </div>
                         <div class="mt-3">
                             <label>Primer nombre *</label>
-                            <input type="text" name="personaPRIMERNOMBRE" id="primerNombre" class="form-control" required>
+                            <input type="text" name="personaPRIMERNOMBRE" id="primerNombre" class="form-control"  maxlength="200" required>
                         </div>
                         <div class="mt-3">
                             <label>Segundo nombre</label>
-                            <input type="text" name="personaSEGUNDONOMBRE" id="segundoNombre" class="form-control">
+                            <input type="text" name="personaSEGUNDONOMBRE" id="segundoNombre" class="form-control"  maxlength="200">
                         </div>
                         <div class="mt-3">
                             <label>Primer Apellido *</label>
-                            <input type="text" name="personaPRIMERAPELLIDO" id="primerApellido" class="form-control" required>
+                            <input type="text" name="personaPRIMERAPELLIDO" id="primerApellido" class="form-control"  maxlength="200" required>
                         </div>
                         <div class="mt-3">
                             <label>Segundo apellido</label>
-                            <input type="text" name="personaSEGUNDOAPELLIDO" id="segundoApellido" class="form-control">
+                            <input type="text" name="personaSEGUNDOAPELLIDO" id="segundoApellido" class="form-control"  maxlength="200">
                         </div>
                         <div class="mt-3">
-                            <label>Correo electrónico</label>
-                            <input type="email" name="personasCorreoPRINCIPAL" id="correo" class="form-control" required>
+                            <label>Correo electrónico *</label>
+                            <input type="email" name="personasCorreoPRINCIPAL" id="correo" class="form-control"  maxlength="200" required>
                         </div>
 
                         <div class="mt-3">
-                            <label>Teléfono</label>
-                            <input type="number" name="telefonoNUMEROCELULAR" id="telefono" class="form-control" required>
+                            <label>Numero celular *</label>
+                            <input type="number" name="telefonoNUMEROCELULAR" id="telefono" class="form-control"  maxlength="15" required>
                         </div>
 
                     </div>
@@ -118,4 +123,5 @@
         <p class="loading-text">Cargando...</p>
     </div>
 </div>
+
 </html>
