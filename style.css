@@ -1,4 +1,4 @@
-.wizard-card {
+.page-wizard .wizard-card {
     background: #ffffff;
     border-radius: 14px;
     padding: 30px;
@@ -6,9 +6,8 @@
     animation: fadeIn .3s ease;
 }
 
-.option-card {
+.page-wizard .option-card {
     position: relative;
-    /* clave para posicionar el radio dentro */
     display: block;
     border: 2px solid #e0e0e0;
     border-radius: 12px;
@@ -18,31 +17,25 @@
     transition: .2s;
 }
 
-.option-card.selected {
+.page-wizard .option-card.selected {
     border-color: #004085;
     background: #e8f1ff;
 }
 
-/* "oculta" el radio, pero sigue recibiendo el click */
-.option-card input[type="radio"] {
+/* Radio dentro de la tarjeta */
+.page-wizard .option-card input[type="radio"] {
     position: absolute;
     inset: 0;
-    /* ocupa toda la tarjeta */
     margin: 0;
     opacity: 0;
-    /* invisible */
     cursor: pointer;
-    /* IMPORTANTE: sin pointer-events:none */
 }
 
-/* estilo suave al texto cuando está checked (no recuadro extra) */
-.option-card input[type="radio"]:checked+h5 {
+.page-wizard .option-card input[type="radio"]:checked+h5 {
     font-weight: 600;
 }
 
-
-
-.loading-overlay {
+.page-wizard .loading-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -56,23 +49,21 @@
     z-index: 99999;
 }
 
-.loading-content {
+.page-wizard .loading-content {
     text-align: center;
     color: white;
 }
 
-.loading-icon {
+.page-wizard .loading-icon {
     width: 140px;
-    /* ajusta tu tamaño */
     margin-bottom: 140px;
 }
 
-.d-none {
+.page-wizard .d-none {
     display: none !important;
 }
 
-
-.alerta-paso-vacio {
+.page-wizard .alerta-paso-vacio {
     padding: 12px;
     background: #f8d7da;
     border: 1px solid #f5c2c7;
@@ -82,7 +73,7 @@
     font-size: 0.95rem;
 }
 
-.input-bloqueo-paso {
+.page-wizard .input-bloqueo-paso {
     position: absolute;
     left: -9999px;
     top: auto;
@@ -92,31 +83,54 @@
     pointer-events: none;
 }
 
-/* 1. Fondo azul para el cuerpo */
-body {
-    background-color: #2a69b7; 
+/* Fondo azul solo para esta página */
+.page-wizard {
+    background-color: #2a69b7;
 }
 
-.appointment-window {
+.page-wizard .appointment-window {
     background: #ffffff;
     border-radius: 14px;
     padding: 30px;
-    max-width: 800px; 
+    max-width: 800px;
     width: 90%;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2); 
-    z-index: 10; 
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    z-index: 10;
 }
 
-
-.wizard {
+.page-wizard .wizard {
     padding: 0;
 }
 
-/* El estilo de .wizard-card puede usarse ahora para los pasos internos */
-.wizard-card {
+.page-wizard .wizard-card {
     background: #ffffff;
     border-radius: 14px;
     padding: 30px;
-    box-shadow: none; 
+    box-shadow: none;
     animation: fadeIn .3s ease;
+}
+
+/*Estilos para la pagina de cancelaciones*/
+.page-cancelaciones {
+    background-color: #f5f7fb;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-cancelaciones .page-wrapper {
+    flex: 1 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.page-cancelaciones .confirm-card {
+    max-width: 600px;
+    width: 100%;
+}
+
+.page-cancelaciones footer {
+    flex-shrink: 0;
 }

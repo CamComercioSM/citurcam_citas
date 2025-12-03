@@ -11,10 +11,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AdrianVillamayor/Wizard-JS@2.0.3/dist/main.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 
-<body class="sb-nav-fixed">
+<body class="sb-nav-fixed page-wizard">
     <main class="d-flex justify-content-center py-5">
         <main class="appointment-window">
             <div class="text-center mb-5">
@@ -115,11 +115,11 @@
             <div id="confirmacionCita" class="text-center d-none">
                 <i class="bi bi-check-circle-fill text-success" style="font-size: 3rem;"></i>
                 <h3 class="mt-3">Tu cita fue creada correctamente</h3>
-                <p class="text-muted">Guarda esta información de tu cita:</p>
+                <p class="text-muted" id="confTextoIntro">Guarda esta información de tu cita:</p>
 
                 <div class="mt-4">
-                    <div class="h5 mb-1">Número de turno</div>
-                    <div class="display-5 fw-bold" id="confNumeroTurno">—</div>
+                    <div class="h5 mb-1">Codigo de cita</div>
+                    <div class="display-5 fw-bold" id="confCodigoCita">—</div>
                 </div>
 
                 <div class="mt-4">
