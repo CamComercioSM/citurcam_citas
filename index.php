@@ -200,7 +200,7 @@
             <div class="row">
                 <!-- LOGO -->
                 <div class="col-md-3 text-center text-md-start mb-3">
-                    <img src="https://www.ccsm.org.co/images/logo.png"
+                    <img src="https://cdnsicam.net/img/ccsm/logo-letra-blanca.png"
                         alt="Cámara de Comercio de Santa Marta"
                         class="img-fluid mb-2" style="max-width:200px;">
                     <p class="small text-white-50 mb-0">
