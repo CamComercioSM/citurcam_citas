@@ -338,7 +338,7 @@ $wz_doc.addEventListener("wz.form.submit", async function () {
         "personaPRIMERAPELLIDO",
         "personaSEGUNDOAPELLIDO",
         "correoDIRECCION",
-        "telefonoNUMEROCELULAR"
+        "telefonoNUMERO"
     ];
 
     formData.forEach((value, key) => {
