@@ -331,6 +331,7 @@ $wz_doc.addEventListener("wz.form.submit", async function () {
     // Lista exacta de campos que SÍ quieres enviar
     const camposPermitidos = [
         "citaID",
+        "citaTIPO",
         "tipoIdentificacionID",
         "personaIDENTIFICACION",
         "personaPRIMERNOMBRE",
