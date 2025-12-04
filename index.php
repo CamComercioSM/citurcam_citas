@@ -60,7 +60,7 @@
 
     <script src="https://cdn.jsdelivr.net/gh/AdrianVillamayor/Wizard-JS@2.0.3/dist/index.js"></script>
     <script src="https://clientes.sicam32.net/javascript/?RVhERDM5OVA3aGV4RXFZMzMzazVlQjlxb0xIUSthQzNGKzRraXlTOFF6UT06OnpaNjJlakMzM3JWN1grcWEwM282Y2lwU0lERyt1U1pzN21rd1E1amNvd1E9"></script>
-    <script src="citas.js"></script>
+
 </head>
 
 <body class="sb-nav-fixed page-wizard">
@@ -268,8 +268,8 @@
         </div>
     </div>
 
-
-
 </body>
+
+<script src="citas.js"></script>
 
 </html>
