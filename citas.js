@@ -2,6 +2,7 @@ let wz_class = ".wizard";
 let tipoCita = null;
 let citaFCHCITA = null;
 let moduloAtencionID = null;
+let turnoTipoServicioTITULO = null;
 let horaSeleccionada = null;
 let sedeID = '10';
 
@@ -191,34 +192,53 @@ function selectFechaCita(fecha, element) {
 }
 
 async function CrearTarjetasDeModulosDeAtencion() {
-    document.getElementById('flagModulo').value = '0';
-    const res = await conectarseEndPoint('calendarioCitasDia', { sedeID, citaFCHCITA });
-    const modulos = res.modulos || [];
+    if (!tipoCita) return;
 
-    if (modulos) {
-        let cont = document.getElementById("modulosContainer");
-        cont.innerHTML = "";
+    document.getElementById('flagModulo').value = '0';
+
+    const res = await conectarseEndPoint('calendarioCitasDia', { sedeID, citaFCHCITA });
+    let modulos = res.modulos || [];
+
+    let cont = document.getElementById("modulosContainer");
+    cont.innerHTML = "";
+    let hayModulos = false;
+
+    modulos = modulos.filter(mod => mod.moduloAtencionMODO == tipoCita);
+
+    if (modulos.length > 0) {
+        hayModulos = true;
+
         modulos.forEach((mod, index) => {
             cont.innerHTML += `
-            <label class="option-card mt-2 modulo-${index}">
-                <input 
-                    type="radio" 
-                    name="moduloAtencionID" 
-                    id="modulo${index}" 
-                    value="${mod.moduloAtencionID}"
-                    onchange="selectModulo('${mod.moduloAtencionID}', this)"
-                    data-require-if="flagModulo:0"
-                >
-                <h5 class="mb-0">${mod.turnoTipoServicioTITULO}</h5>
-            </label>
-        `;
+                <label class="option-card mt-2 modulo-${index}">
+                    <input 
+                        type="radio" 
+                        name="moduloAtencionID" 
+                        id="modulo${index}" 
+                        value="${mod.moduloAtencionID}"
+                        onchange="selectModulo('${mod.moduloAtencionID}', this)"
+                        data-require-if="flagModulo:0"
+                    >
+                    <h5 class="mb-0">${mod.moduloAtencionTITULO}</h5>
+                    <h6 class="mb-1">${mod.turnoTipoServicioTITULO}</h6>
+                </label>
+            `;
         });
     }
+    if (!hayModulos) {
+        mostrarAlertaDePasoVacio(
+            cont,
+            'No hay módulos disponibles para el tipo de cita seleccionado.'
+        );
+    }
+
     mostrarModalDeCarga(false);
 }
 
+
 function selectModulo(id, element) {
     moduloAtencionID = id;
+    turnoTipoServicioTITULO = element.closest('.option-card').querySelector('h5').textContent || '';
 
     document
         .querySelectorAll("#modulosContainer .option-card")
@@ -302,7 +322,11 @@ $wz_doc.addEventListener("wz.form.submit", async function () {
     mostrarModalDeCarga(true);
 
     const formData = new FormData(document.querySelector(".wizard"));
-    const params = {};
+    const params = {
+        citaFCHCITA,
+        horaSeleccionada,
+        turnoTipoServicioTITULO
+    };
 
     // Lista exacta de campos que SÍ quieres enviar
     const camposPermitidos = [
@@ -323,13 +347,18 @@ $wz_doc.addEventListener("wz.form.submit", async function () {
         }
     });
 
-    const res = await conectarseEndPoint('guardarCita', params);
+    try {
+        const res = await conectarseEndPoint('uardarCita', params);
+        if (res.RESPUESTA !== "EXITO") {
+            mostrarAlertaError(res.MENSAJE || 'Ocurrió un error al guardar la cita.');
+            return;
+        }
+        mostrarAlertaExito(res.DATOS);
+    } catch (error) {
 
-    console.log("Datos a enviar:", params);
-    console.log("datos recibidos", res);
-
-    mostrarAlertaExito(res);
-    mostrarModalDeCarga(false);
+    } finally {
+        mostrarModalDeCarga(false);
+    }
 });
 
 
@@ -382,8 +411,78 @@ function mostrarAlertaDePasoVacio(contenedor, mensaje) {
     `;
 }
 
-function mostrarAlertaExito(datos) {
-    document.querySelector(".wizard").classList.add("d-none");
+// function mostrarAlertaExito(datos) {
+//     document.querySelector(".wizard").classList.add("d-none");
+//     const conf = document.getElementById("confirmacionCita");
+//     if (!conf) return;
+//     conf.classList.remove("d-none");
+
+//     // Llenar datos
+//     document.getElementById("confCodigoCita").textContent = datos.citaID || "—";
+//     document.getElementById("confFecha").textContent = datos.citaFCHCITA || "—";
+//     document.getElementById("confHora").textContent = datos.horaSeleccionada || "—";
+//     document.getElementById("confModulo").textContent = datos.turnoTipoServicioTITULO || "—";
+//     document.getElementById("confCorreo").textContent = datos.correoDIRECCION || "—";
+// }
+
+function mostrarResultadoCita({ exito, datos = {}, mensajeError = "" }) {
+    // Ocultar el wizard
+    const wizard = document.querySelector(".wizard");
+    if (wizard) wizard.classList.add("d-none");
+
+    // Mostrar contenedor de resultado
     const conf = document.getElementById("confirmacionCita");
-    if (conf) conf.classList.remove("d-none");
+    if (!conf) return;
+    conf.classList.remove("d-none");
+
+    const icono = conf.querySelector("i");
+    const titulo = conf.querySelector("h3");
+    const textoIntro = document.getElementById("confTextoIntro");
+    const detalleCita = document.getElementById("confDetalleCita");
+
+    if (exito) {
+        if (icono) {
+            icono.classList.remove("text-danger", "bi-x-circle-fill");
+            icono.classList.add("text-success", "bi-check-circle-fill");
+        }
+
+        if (titulo) titulo.textContent = "Tu cita fue creada correctamente";
+        if (textoIntro) textoIntro.textContent = "Guarda esta información de tu cita:";
+        if (detalleCita) detalleCita.classList.remove("d-none");
+
+        // Llenar datos
+        document.getElementById("confCodigoCita").textContent = datos.citaID || "—";
+        document.getElementById("confFecha").textContent = datos.citaFCHCITA || "—";
+        document.getElementById("confHora").textContent = datos.horaSeleccionada || "—";
+        document.getElementById("confModulo").textContent = datos.turnoTipoServicioTITULO || "—";
+        document.getElementById("confCorreo").textContent = datos.correoDIRECCION || "—";
+
+    } else {
+        // Icono / estilos de error
+        if (icono) {
+            icono.classList.remove("text-success", "bi-check-circle-fill");
+            icono.classList.add("text-danger", "bi-x-circle-fill");
+        }
+
+        if (titulo) titulo.textContent = "No pudimos crear tu cita";
+        if (textoIntro) {
+            textoIntro.textContent =
+                mensajeError || "Ocurrió un error al intentar guardar tu cita.";
+        }
+
+        // Ocultamos el detalle de cita
+        if (detalleCita) detalleCita.classList.add("d-none");
+
+        // Número de turno también lo dejamos vacío
+        const numeroTurno = document.getElementById("confNumeroTurno");
+        if (numeroTurno) numeroTurno.textContent = "—";
+    }
+}
+
+function mostrarAlertaExito(datos) {
+    mostrarResultadoCita({ exito: true, datos });
+}
+
+function mostrarAlertaError(mensaje) {
+    mostrarResultadoCita({ exito: false, mensajeError: mensaje });
 }
