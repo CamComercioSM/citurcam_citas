@@ -348,7 +348,7 @@ $wz_doc.addEventListener("wz.form.submit", async function () {
     });
 
     try {
-        const res = await conectarseEndPoint('uardarCita', params);
+        const res = await conectarseEndPoint('guardarCita', params);
         if (res.RESPUESTA !== "EXITO") {
             mostrarAlertaError(res.MENSAJE || 'Ocurrió un error al guardar la cita.');
             return;
