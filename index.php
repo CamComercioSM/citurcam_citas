@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -13,13 +13,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AdrianVillamayor/Wizard-JS@2.0.3/dist/main.min.css">
     <link rel="stylesheet" href="/style.css">
     <style>
-        /* ===== FOOTER INSTITUCIONAL FIJO ABAJO ===== */
         html,
         body {
             height: 100%;
         }
 
         body {
+            min-height: 100vh;
+            /* que siempre mida al menos el alto de la ventana */
             display: flex;
             flex-direction: column;
         }
@@ -31,6 +32,8 @@
 
         .footer-ccsm {
             flex-shrink: 0;
+            margin-top: auto;
+            /* CLAVE: se pega al fondo cuando el contenido es corto */
             background-color: #003057;
             /* Azul institucional CCSM */
             color: white;
@@ -58,6 +61,7 @@
         }
     </style>
 
+
     <script src="https://cdn.jsdelivr.net/gh/AdrianVillamayor/Wizard-JS@2.0.3/dist/index.js"></script>
     <script src="https://clientes.sicam32.net/javascript/?RVhERDM5OVA3aGV4RXFZMzMzazVlQjlxb0xIUSthQzNGKzRraXlTOFF6UT06OnpaNjJlakMzM3JWN1grcWEwM282Y2lwU0lERyt1U1pzN21rd1E1amNvd1E9"></script>
 
@@ -66,7 +70,7 @@
 <body class="sb-nav-fixed page-wizard">
     <div id="contenido-principal">
         <main class="d-flex justify-content-center py-5">
-            <main class="appointment-window">
+            <div class="appointment-window">
                 <div class="text-center mb-5">
                     <img src="https://www.ccsm.org.co/images/logo.png" width="260" alt="Logo CCSM" class="img rounded img-fluid mx-auto d-block">
                     <div class="h1 fw-light fw-bold py-3 mb-1">Solicita tu cita</div>
@@ -185,7 +189,8 @@
                         Crear otra cita
                     </button>
                 </div>
-            </main>
+            </div>
+        </main>
     </div> <!-- /contenido-principal -->
 
 
