@@ -10,6 +10,7 @@
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Icons -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
@@ -93,81 +94,7 @@
         </div>
     </div>
 
-    <footer class="bg-white border-top py-5">
-        <div class="container small text-muted">
-
-            <div class="row g-4 text-center text-md-start">
-
-                <!-- Columna 1 -->
-                <div class="col-md-4">
-                    <img
-                        src="https://cdnsicam.net/img/logo-vertical-320.png"
-                        alt="Logo cámara de comercio de Santa Marta"
-                        class="img-fluid mb-3"
-                        style="max-width: 180px;">
-                </div>
-
-                <!-- Columna 2 -->
-                <div class="col-md-4">
-                    <h6 class="fw-bold mb-3">¿Necesitas ayuda?</h6>
-
-                    <p class="mb-3 text-muted">
-                        Si tienes alguna duda puedes ponerte en contacto con nosotros:
-                    </p>
-
-                    <p class="mb-2">
-                        <i class="bi bi-envelope me-1"></i>
-                        <a href="mailto:correspondencia@ccsm.org.co">correspondencia@ccsm.org.co</a>
-                    </p>
-
-                    <p class="mb-2">
-                        <i class="bi bi-envelope me-1"></i>
-                        <a href="mailto:camarasm@ccsm.org.co">camarasm@ccsm.org.co</a>
-                    </p>
-
-                    <p class="mb-2">
-                        <i class="bi bi-whatsapp me-1"></i>
-                        WhatsApp:
-                        <a href="https://wa.me/573114147779" target="_blank">+57 311 414 77 79</a>
-                    </p>
-
-                    <p class="mb-0">
-                        <i class="bi bi-chat-dots me-1"></i>
-                        <a href="">PQRSD</a>
-                    </p>
-                </div>
-
-                <div class="col-md-4">
-                    <h6 class="fw-bold mb-3">Horarios & Línea Ética</h6>
-
-                    <p class="mb-3 text-muted">
-                        Nuestros horarios de atención son:
-                    </p>
-
-                    <p class="mb-2">
-                        <i class="bi bi-clock me-1"></i>
-                        <strong>Lunes a viernes</strong><br>
-                        8:00 a.m. a 4:00 p.m.
-                    </p>
-
-                    <hr class="my-3" style="opacity: .15;">
-
-                    <p class="mb-2">
-                        <i class="bi bi-people me-1"></i>
-                        Línea Ética: +57 300 860 5067
-                    </p>
-
-                    <p class="mb-0">
-                        <i class="bi bi-envelope me-1"></i>
-                        <a href="gmail:lineaetica@ccsm.org.co">lineaetica@ccsm.org.co</a>
-                    </p>
-                </div>
-
-
-            </div>
-        </div>
-    </footer>
-
+    <?php include 'footer.php'; ?>
 
     <div class="modal fade" id="modalConfirmar" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
@@ -194,9 +121,18 @@
             </div>
         </div>
     </div>
+    <div id="loadingOverlay" class="loading-overlay d-none">
+        <div class="loading-content">
+            <img src="https://cdnsicam.net/img/ccsm/__Logo%20C%C3%A1mara%20para%20el%20Magdalena.png" alt="Cargando..." class="loading-icon">
+            <p class="loading-text">Cargando...</p>
+        </div>
+    </div>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/healper.js"></script>
     <script src="/cancelaciones.js"></script>
+
+
 
 </body>
 

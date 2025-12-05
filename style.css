@@ -35,7 +35,7 @@
     font-weight: 600;
 }
 
-.page-wizard .loading-overlay {
+.loading-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -49,17 +49,17 @@
     z-index: 99999;
 }
 
-.page-wizard .loading-content {
+.loading-content {
     text-align: center;
     color: white;
 }
 
-.page-wizard .loading-icon {
+.loading-icon {
     width: 140px;
     margin-bottom: 140px;
 }
 
-.page-wizard .d-none {
+.d-none {
     display: none !important;
 }
 
@@ -129,8 +129,4 @@
 .page-cancelaciones .confirm-card {
     max-width: 600px;
     width: 100%;
-}
-
-.page-cancelaciones footer {
-    flex-shrink: 0;
 }

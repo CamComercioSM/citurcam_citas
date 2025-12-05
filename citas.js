@@ -267,7 +267,7 @@ async function CrearTarjetasDeHorasDisponibles() {
         citasModulos.forEach((bloque, index) => {
             const citaDisponible = bloque.citas.find(cita =>
                 cita.moduloAtencionID == moduloAtencionID &&
-                cita.personaID === null
+                cita.citaESTADOCITA === "SIN ASIGNAR"
             );
             if (!citaDisponible) {
                 return;
@@ -384,14 +384,6 @@ window.conectarseEndPoint = async function (operacion, params = {}) {
     return await response.json();
 }
 
-function mostrarModalDeCarga(opcion = true) {
-    if (opcion) {
-        document.getElementById('loadingOverlay').classList.remove('d-none');
-    } else {
-        document.getElementById('loadingOverlay').classList.add('d-none');
-    }
-}
-
 function mostrarAlertaDePasoVacio(contenedor, mensaje) {
     if (!contenedor) return;
 
@@ -411,20 +403,6 @@ function mostrarAlertaDePasoVacio(contenedor, mensaje) {
         >
     `;
 }
-
-// function mostrarAlertaExito(datos) {
-//     document.querySelector(".wizard").classList.add("d-none");
-//     const conf = document.getElementById("confirmacionCita");
-//     if (!conf) return;
-//     conf.classList.remove("d-none");
-
-//     // Llenar datos
-//     document.getElementById("confCodigoCita").textContent = datos.citaID || "—";
-//     document.getElementById("confFecha").textContent = datos.citaFCHCITA || "—";
-//     document.getElementById("confHora").textContent = datos.horaSeleccionada || "—";
-//     document.getElementById("confModulo").textContent = datos.turnoTipoServicioTITULO || "—";
-//     document.getElementById("confCorreo").textContent = datos.correoDIRECCION || "—";
-// }
 
 function mostrarResultadoCita({ exito, datos = {}, mensajeError = "" }) {
     // Ocultar el wizard
