@@ -20,7 +20,6 @@ let detalle = document.getElementById("infoCitaPregunta");
 async function mostrarDatosCitaParaCancelar() {
     try {
         const res = await conectarseEndPoint('datosCitaPorHash', { citaHASH });
-
         if (!res || res.RESPUESTA !== "EXITO" || !res.DATOS) {
             mostrarResultado(
                 false,
@@ -116,11 +115,16 @@ btnNo.addEventListener("click", function () {
 document.addEventListener("DOMContentLoaded", function () {
 
 
-    if (!citaHASH) {
-        preguntaTexto.textContent = "No se encontró información de la cita. Verifica el enlace que estás usando.";
+    if (!citaHASH || citaHASH.toLowerCase() === "cancelaciones") {
+        mostrarResultado(
+            false,
+            null,
+            "No se encontró información de la cita. Verifica el enlace que estás usando."
+        );
         btnSi.disabled = true;
         return;
     }
+
 
     mostrarDatosCitaParaCancelar();
 

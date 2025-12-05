@@ -25,7 +25,6 @@ window.conectarseEndPoint = async function (operacion, params = {}) {
         throw error;
 
     } finally {
-        // 🔥 Esto se ejecuta SIEMPRE, haya error o no
         mostrarModalDeCarga(false);
     }
 }
