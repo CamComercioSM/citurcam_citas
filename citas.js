@@ -261,6 +261,7 @@ async function CrearTarjetasDeHorasDisponibles() {
     let cont = document.getElementById("horasContainer");
     cont.innerHTML = "";
     let hayHoras = false;
+    //calendarioCitasFecha
     const res = await conectarseEndPoint('calendarioCitasFecha', { sedeID, citaFCHCITA });
     const citasModulos = res.datos || [];
     if (citasModulos.length > 0) {
