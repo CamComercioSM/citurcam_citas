@@ -7,14 +7,14 @@ let horaSeleccionada = null;
 let sedeID = '10';
 
 const args = {
-    "wz_class": ".wizard",
+    "wz_class": wz_class,
     "wz_nav_style": "dots",
     "wz_button_style": ".btn .btn-sm .mx-3",
     "wz_ori": "horizontal",
     "buttons": true,
     "navigation": "all",
     "finish": "Agendar",
-    "bubble": true,
+    "bubbles": true,
     "next": "Siguiente",
     "prev": "Atras"
 };
@@ -318,10 +318,12 @@ function selectHora(hora, element) {
 }
 
 
-$wz_doc.addEventListener("wz.form.submit", async function () {
-
-    mostrarModalDeCarga(true);
-
+$wz_doc.addEventListener("wz.form.submit", async function (e) {
+    if (!validarPasoFinal()) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        return;
+    }
     const formData = new FormData(document.querySelector(".wizard"));
     const params = {
         citaFCHCITA,

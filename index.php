@@ -15,6 +15,7 @@
 
     <script src="https://cdn.jsdelivr.net/gh/AdrianVillamayor/Wizard-JS@2.0.3/dist/index.js"></script>
     <script src="https://clientes.sicam32.net/javascript/?RVhERDM5OVA3aGV4RXFZMzMzazVlQjlxb0xIUSthQzNGKzRraXlTOFF6UT06OnpaNjJlakMzM3JWN1grcWEwM282Y2lwU0lERyt1U1pzN21rd1E1amNvd1E9"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 
@@ -27,7 +28,7 @@
                     <div class="h1 fw-light fw-bold py-3 mb-1">Solicita tu cita</div>
                     <p class="text-muted mb-0">Sigue los pasos para generar tu cita.</p>
                 </div>
-                <form class="wizard" id="formWizard">
+                <form class="wizard" id="formWizard" novalidate>
                     <aside class="wizard-content container">
                         <div class="wizard-step" data-wz-title="Tipo de cita">
                             <input type="hidden" id="tipoCitaInput" name="citaTIPO" class="required">
@@ -63,20 +64,12 @@
                         </div>
                         <div class="wizard-step" data-wz-title="Hora de la cita">
                             <div class="step-title mb-3"><i class="bi bi-clock"></i> Seleccione la hora</div>
-                            <input type="hidden" id="flagHoraCita" name="flagHoraCita" value="" require>
+                            <input type="hidden" id="flagHoraCita" name="flagHoraCita" value="" required>
                             <div id="horasContainer"></div>
                         </div>
                         <div class="wizard-step" data-wz-title="Datos personales">
                             <div class="step-title mb-3"><i class="bi bi-person"></i> Datos de contacto</div>
-                            <div class="mt-4 form-check">
-                                <input class="form-check-input required" type="radio" id="aceptaTerminos" name="aceptaTerminos" />
-                                <label class="form-check-label" for="aceptaTerminos">
-                                    Acepta los
-                                    <a href="https://www.ccsm.org.co/proteccion-de-datos-personales.html" target="_blank">
-                                        Términos, Condiciones y Políticas de Privacidad de datos
-                                    </a> personales de la Cámara de Comercio de Santa Marta para El Magdalena.
-                                </label>
-                            </div>
+
                             <div class="mt-3">
                                 <label for="tipoIdentificacion">Tipo identificación *</label>
                                 <select name="tipoIdentificacionID" id="tipoIdentificacion" class="form-control" required>
@@ -86,7 +79,7 @@
 
                             <div class="mt-3">
                                 <label>Identificación *</label>
-                                <input type="text" name="personaIDENTIFICACION" id="identificacion" class="form-control" pattern="^(?!0+$).*$" maxlength="15" required>
+                                <input type="text" name="personaIDENTIFICACION" id="identificacion" class="form-control" pattern="^(?!0+$).*$" maxlength="15" required >
                             </div>
                             <div class="mt-3">
                                 <label>Primer nombre *</label>
@@ -112,6 +105,15 @@
                             <div class="mt-3">
                                 <label>Numero celular *</label>
                                 <input type="number" name="telefonoNUMERO" id="telefono" class="form-control" maxlength="15" required>
+                            </div>
+                            <div class="mt-4 form-check">
+                                <input class="form-check-input" type="radio" id="aceptaTerminos" name="aceptaTerminos" />
+                                <label class="form-check-label" for="aceptaTerminos">
+                                    Acepta los
+                                    <a href="https://www.ccsm.org.co/proteccion-de-datos-personales.html" target="_blank">
+                                        Términos, Condiciones y Políticas de Privacidad de datos
+                                    </a> personales de la Cámara de Comercio de Santa Marta para El Magdalena.
+                                </label>
                             </div>
 
                         </div>

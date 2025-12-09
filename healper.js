@@ -52,3 +52,34 @@ window.agregarFooter = async function () {
         console.error("Error cargando el footer:", error);
     }
 };
+window.validarPasoFinal = function () {
+    const input = document.getElementById("aceptaTerminos");
+    if (!input) return true; // si no existe, permitir continuar
+
+    const contenedor = input.closest(".form-check") || input.parentElement;
+
+    input.classList.remove("is-invalid");
+    const previo = contenedor.querySelector(".mensaje-error");
+    if (previo) previo.remove();
+
+    const esValido = input.checked;
+
+    if (!esValido) {
+        input.classList.add("is-invalid");
+
+        Swal.fire({
+            icon: "warning",
+            title: "Términos y condiciones",
+            text: "Debe aceptar los términos y condiciones para continuar.",
+            confirmButtonText: "Entendido",
+            confirmButtonColor: "#3085d6",
+            width: "420px",
+            timer: 3500,
+            timerProgressBar: true
+        });
+
+        return false;
+    }
+
+    return true;
+};
