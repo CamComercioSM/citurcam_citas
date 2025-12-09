@@ -21,7 +21,7 @@ const args = {
 
 const wizard = new Wizard(args);
 wizard.init();
-
+agregarFooter();
 let $wz_doc = document.querySelector(wz_class);
 
 //Eventos de cambio en tipo y numero de identificacion

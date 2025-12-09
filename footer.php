@@ -65,9 +65,9 @@
                 <h6 class="text-white fw-bold mb-2">Enlaces Institucionales</h6>
                 <ul class="list-unstyled text-white-50 small">
                     <li><a href="https://www.ccsm.org.co/es/" target="_blank">Sitio Oficial</a></li>
-                    <li><a href="https://www.ccsm.org.co/es/quienes-somos.html" target="_blank">Quiénes Somos</a></li>
-                    <li><a href="https://www.ccsm.org.co/es/atencion-al-cliente.html" target="_blank">Atención al Cliente</a></li>
-                    <li><a href="https://www.ccsm.org.co/es/pqrs.html" target="_blank">PQRS</a></li>
+                    <li><a href="https://www.ccsm.org.co/es/la-camara-PG15" target="_blank">Quiénes Somos</a></li>
+                    <li><a href="https://www.ccsm.org.co/es/tramites-y-guias-PG8" target="_blank">Tramites y servicios</a></li>
+                    <li><a href="https://www.ccsm.org.co/es/pqrsd" target="_blank">PQRS</a></li>
                 </ul>
             </div>
 
@@ -75,14 +75,11 @@
             <div class="col-md-3 mb-3">
                 <h6 class="text-white fw-bold mb-2">Políticas y Documentos</h6>
                 <ul class="list-unstyled text-white-50 small">
-                    <li><a href="https://www.ccsm.org.co/proteccion-de-datos-personales.html" target="_blank">
+                    <li><a href="https://www.ccsm.org.co/es/politica-de-privacidad-y-tratamiento-de-datos-personales" target="_blank">
                             Protección de Datos Personales
                         </a></li>
-                    <li><a href="https://www.ccsm.org.co/es/terminos-y-condiciones.html" target="_blank">
+                    <li><a href="https://www.ccsm.org.co/es/terminos-y-condiciones-de-uso-de-la-pagina-web-paginas" target="_blank">
                             Términos y Condiciones
-                        </a></li>
-                    <li><a href="https://www.ccsm.org.co/es/politicas-de-uso.html" target="_blank">
-                            Políticas de Uso
                         </a></li>
                 </ul>
             </div>
@@ -93,9 +90,11 @@
                 <p class="small text-white-50 mb-1">
                     Calle 24 # 2-66, Santa Marta, Magdalena
                 </p>
-                <p class="small text-white-50 mb-1">Teléfono: (605) 420 9900</p>
+                <p class="small text-white-50 mb-1">Teléfono: (605) 4209909</p>
                 <p class="small text-white-50">
-                    Correo: <a href="mailto:contacto@ccsm.org.co">contacto@ccsm.org.co</a>
+                    Correos: <br/>
+                    <a href="mailto:correspondencia@ccsm.org.co">correspondencia@ccsm.org.co</a>
+                    <a href="mailto:camarasm@ccsm.org.co">camarasm@ccsm.org.co</a>
                 </p>
             </div>
         </div>

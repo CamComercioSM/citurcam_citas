@@ -145,8 +145,6 @@
     </div> <!-- /contenido-principal -->
 
 
-    <?php include 'footer.php'; ?>
-
     <div id="loadingOverlay" class="loading-overlay d-none">
         <div class="loading-content">
             <img src="https://cdnsicam.net/img/ccsm/__Logo%20C%C3%A1mara%20para%20el%20Magdalena.png" alt="Cargando..." class="loading-icon">

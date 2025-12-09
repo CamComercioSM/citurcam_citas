@@ -35,3 +35,20 @@ function mostrarModalDeCarga(opcion = true) {
         document.getElementById('loadingOverlay').classList.add('d-none');
     }
 }
+
+window.agregarFooter = async function () {
+    try {
+        const resp = await fetch('https://cdnsicam.net/plantillas/apps/piecera-2026.html');
+        const html = await resp.text();
+
+        const contenedor = document.createElement("div");
+        contenedor.innerHTML = html;
+
+        while (contenedor.firstChild) {
+            document.body.appendChild(contenedor.firstChild);
+        }
+
+    } catch (error) {
+        console.error("Error cargando el footer:", error);
+    }
+};
